@@ -16,8 +16,8 @@ services:
   crapi-identity:
     container_name: crapi-identity
     image: crapi/crapi-identity:${VERSION:-latest}
-    ports:
-      - "${LISTEN_IP:-0.0.0.0}:8080:8080"
+    #ports:
+    #  - "${LISTEN_IP:-127.0.0.1}:8080:8080"
     volumes:
       - ./keys:/keys
     environment:
@@ -149,7 +149,7 @@ services:
     container_name: crapi-web
     image: crapi/crapi-web:${VERSION:-latest}
     ports:
-      - "${LISTEN_IP:-0.0.0.0}:8888:80"
+      - "${LISTEN_IP:-127.0.0.1}:8888:80"
       - "${LISTEN_IP:-127.0.0.1}:8443:443"
     environment:
       - COMMUNITY_SERVICE=crapi-community:${COMMUNITY_SERVER_PORT:-8087}
