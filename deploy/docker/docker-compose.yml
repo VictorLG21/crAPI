@@ -15,7 +15,7 @@ services:
 
   crapi-identity:
     container_name: crapi-identity
-    image: crapi/crapi-identity:latest
+    image: crapi/crapi-identity:${VERSION:-latest}
     #ports:
     #  - "${LISTEN_IP:-127.0.0.1}:8080:8080"
     volumes:
@@ -149,8 +149,8 @@ services:
     container_name: crapi-web
     image: crapi/crapi-web:${VERSION:-latest}
     ports:
-      - "${LISTEN_IP:-0.0.0.0}:8888:80"
-      - "${LISTEN_IP:-0.0.0.0}:8443:443"
+      - "${LISTEN_IP:-127.0.0.1}:8888:80"
+      - "${LISTEN_IP:-127.0.0.1}:8443:443"
     environment:
       - COMMUNITY_SERVICE=crapi-community:${COMMUNITY_SERVER_PORT:-8087}
       - IDENTITY_SERVICE=crapi-identity:${IDENTITY_SERVER_PORT:-8080}
@@ -227,7 +227,7 @@ services:
       MH_STORAGE: mongodb
     ports:
     #  - "127.0.0.1:1025:1025" # smtp server
-      - "${LISTEN_IP:-0.0.0.0}:8025:8025" # Mail ui
+      - "${LISTEN_IP:-127.0.0.1}:8025:8025" # Mail ui
     healthcheck:
         test: ["CMD", "nc", "-z", "localhost", "8025"]
         interval: 15s
