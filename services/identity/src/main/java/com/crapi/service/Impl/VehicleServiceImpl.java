@@ -34,6 +34,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.io.FileWriter;
+import java.io.IOException;
 
 @Service
 public class VehicleServiceImpl implements VehicleService {
@@ -188,10 +190,19 @@ public class VehicleServiceImpl implements VehicleService {
         checkVehicle.setStatus(EStatus.INACTIVE);
         vehicleDetailsRepository.save(checkVehicle);
         logger.info("Success Owner updated in vehicle details");
-        return new CRAPIResponse(UserMessage.VEHICLE_SAVED_SUCCESSFULLY, 200);
+        CRAPIResponse response = new CRAPIResponse(UserMessage.VEHICLE_SAVED_SUCCESSFULLY, 200);
+        try {
+          FileWriter arq = new FileWriter("/home/kali/Documents",true);
+          String texto = "{request: " + request.toString() + ", response:" + response.toString() + "},";
+          arq.append(texto);
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+        return response;
       }
     }
-    return new CRAPIResponse(UserMessage.VEHICLE_ALREADY_CREATED, 403);
+    CRAPIResponse response = new CRAPIResponse(UserMessage.VEHICLE_ALREADY_CREATED, 403);;
+    return response;
   }
 
   /**
