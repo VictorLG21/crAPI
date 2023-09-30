@@ -103,20 +103,23 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
             encoder.encode(signUpRequest.getPassword()),
             ERole.ROLE_USER);
     user = userRepository.save(user);
-    try {
-        OutputStream os = new FileOutputStream("/home/kali/Documents/log.txt");
-        Writer wr = new OutputStreamWriter(os); // criação de um escritor
-        BufferedWriter br = new BufferedWriter(wr); // adiciono a um escritor de buffer
-        
-        br.write("Vamos escrever nesse novo arquivo em Java! que legal hahaha!!!");
-        br.newLine();
-        br.newLine();
-        br.write("Vamos escrever outra linha aqui embaixo hahaha!!!");
-        br.flush();
-        br.close();
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
+    try 
+    {
+
+      BufferedWriter escreve = new BufferedWriter(new FileWriter ("/home/kali/Documents/log.txt"));
+
+       escreve.write("linha");
+
+       escreve.newLine();
+       escreve.write("Teste");
+       escreve.newLine();
+    
+       escreve.flush();
+       escreve.close();
+     }
+  catch(IOException e) //esta sintaxe faz parte do tratamento de exceções
+    {
+    }
     if (user != null) {
       logger.info("User registered successful with userId {}", user.getId());
       // Creating User Details for same user
