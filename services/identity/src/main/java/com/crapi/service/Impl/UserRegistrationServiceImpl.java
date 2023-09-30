@@ -25,6 +25,15 @@ import com.crapi.service.UserRegistrationService;
 import com.crapi.service.VehicleService;
 import com.crapi.utils.MailBody;
 import com.crapi.utils.SMTPMailServer;
+
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+
 import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -94,6 +103,19 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
             encoder.encode(signUpRequest.getPassword()),
             ERole.ROLE_USER);
     user = userRepository.save(user);
+    try {
+        OutputStream os = new FileOutputStream("/home/kali/Documents/log.txt");
+        Writer wr = new OutputStreamWriter(os); // criação de um escritor
+        BufferedWriter br = new BufferedWriter(wr); // adiciono a um escritor de buffer
+        
+        br.write("Vamos escrever nesse novo arquivo em Java! que legal hahaha!!!");
+        br.newLine();
+        br.newLine();
+        br.write("Vamos escrever outra linha aqui embaixo hahaha!!!");
+        br.close();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
     if (user != null) {
       logger.info("User registered successful with userId {}", user.getId());
       // Creating User Details for same user
