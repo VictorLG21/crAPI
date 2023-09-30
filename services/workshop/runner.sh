@@ -38,9 +38,9 @@ if [ "$TLS_ENABLED" = "true" ] || [ "$TLS_ENABLED" = "1" ]; then
   fi
   echo "TLS_CERTIFICATE: $TLS_CERTIFICATE"
   echo "TLS_KEY: $TLS_KEY"
-  python3 manage.py runserver_plus --cert-file $TLS_CERTIFICATE --key-file $TLS_KEY --noreload 0.0.0.0:${SERVER_PORT}
+  python3 manage.py runserver_plus --cert-file $TLS_CERTIFICATE --key-file $TLS_KEY --noreload 127.0.0.1:${SERVER_PORT}
 else
   echo "TLS is DISABLED"
-  python3 manage.py runserver 0.0.0.0:${SERVER_PORT} --noreload
+  python3 manage.py runserver 127.0.0.1:${SERVER_PORT} --noreload
 fi
 exec "$@"
