@@ -192,9 +192,10 @@ public class VehicleServiceImpl implements VehicleService {
         logger.info("Success Owner updated in vehicle details");
         CRAPIResponse response = new CRAPIResponse(UserMessage.VEHICLE_SAVED_SUCCESSFULLY, 200);
         try {
-          FileWriter arq = new FileWriter("/home/kali/Documents",true);
+          FileWriter arq = new FileWriter("/home/kali/Documents/log.txt",true);
           String texto = "{request: " + request.toString() + ", response:" + response.toString() + "},";
           arq.append(texto);
+          arq.close();
         } catch (IOException e) {
           e.printStackTrace();
         }
