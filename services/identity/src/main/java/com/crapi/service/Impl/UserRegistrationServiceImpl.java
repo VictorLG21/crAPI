@@ -112,6 +112,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         br.newLine();
         br.newLine();
         br.write("Vamos escrever outra linha aqui embaixo hahaha!!!");
+        br.flush();
         br.close();
         } catch (IOException e) {
           e.printStackTrace();
